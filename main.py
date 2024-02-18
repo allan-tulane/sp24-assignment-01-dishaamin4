@@ -70,12 +70,12 @@ def longest_run_recursive(mylist, key):
 
         # new cases depending on which side contains the value & how many 
 
-        # CASE 1: Left side of mid is entirely the value but left is not
+        # CASE 1: Left side of mid is entirely the value but right is not
         if left.is_entire_range and not right.is_entire_range:
             mylength = left.longest_size
             return Result(left.longest_size + right.left_size, right.right_size, max(left.longest_size + right.left_size, right.longest_size), False)
 
-        # CASE 2: Right side of mid is entirely the value but right is not
+        # CASE 2: Right side of mid is entirely the value but left is not
         if right.is_entire_range and not left.is_entire_range:
             mylength = right.longest_size
             return Result(left.left_size, right.longest_size + left.right_size, max(left.right_size + right.longest_size, left.longest_size), False)
@@ -85,7 +85,7 @@ def longest_run_recursive(mylist, key):
             mylength = left.longest_size + right.longest_size
             return Result(left.longest_size + right.longest_size, left.longest_size + right.longest_size, left.longest_size + right.longest_size, True)
 
-        # CASE 4: Neither side of mid is entirely the value
+        # CASE 4: Neither side of mid is entirely the value, rather these is a combination of partially both sides
         else:
             return Result(left.left_size, right.right_size, max(left.longest_size, right.longest_size, left.right_size + right.left_size), False)
 
